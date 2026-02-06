@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Instrutor Matheus - Grau Técnico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #9d4edd;
+            --neon-green: #10b981;
+            --neon-pink: #f72585;
+            --dark-bg: #0a0a1a;
+            --card-bg: rgba(30, 30, 46, 0.7);
+            --text-primary: #ffffff;
+            --text-secondary: #b4b4c8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a0a1a 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            animation: float 15s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-50px); }
+            75% { transform: translateY(-100px) translateX(100px); }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--neon-green);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-cyan);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .menu-card:hover::before {
+            left: 100%;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 15px 40px rgba(0, 243, 255, 0.3);
+        }
+
+        .menu-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .menu-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--neon-cyan);
+        }
+
+        .menu-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .badge-iniciante { background: rgba(16, 185, 129, 0.2); color: var(--neon-green); border: 1px solid var(--neon-green); }
+        .badge-intermediario { background: rgba(0, 243, 255, 0.2); color: var(--neon-cyan); border: 1px solid var(--neon-cyan); }
+        .badge-avancado { background: rgba(247, 37, 133, 0.2); color: var(--neon-pink); border: 1px solid var(--neon-pink); }
+        .badge-profissional { background: rgba(157, 78, 221, 0.2); color: var(--neon-purple); border: 1px solid var(--neon-purple); }
+
+        /* Game Screen */
+        .game-screen {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(157, 78, 221, 0.3);
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(157, 78, 221, 0.5);
+        }
+
+        .game-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-item i {
+            font-size: 1.3em;
+            color: var(--neon-cyan);
+        }
+
+        .info-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--neon-green);
+        }
+
+        /* Question Card */
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .question-number {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: rgba(30, 30, 46, 0.5);
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-size: 1.05em;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn:hover {
+            border-color: var(--neon-cyan);
+            background: rgba(0, 243, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .option-btn.correct {
+            border-color: var(--neon-green);
+            background: rgba(16, 185, 129, 0.2);
+            animation: correctPulse 0.5s;
+        }
+
+        .option-btn.incorrect {
+            border-color: var(--neon-pink);
+            background: rgba(247, 37, 133, 0.2);
+            animation: shake 0.5s;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Feedback Modal */
+        .feedback-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .feedback-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 25px;
+            border: 2px solid;
+            max-width: 600px;
+            text-align: center;
+            animation: slideUp 0.4s;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .feedback-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .feedback-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .feedback-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1em;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.3);
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Results Screen */
+        .results-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 25px;
+            border: 2px solid rgba(157, 78, 221, 0.4);
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .results-icon {
+            font-size: 6em;
+            margin-bottom: 20px;
+        }
+
+        .results-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .result-stat {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .result-stat-value {
+            font-size: 2.5em;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+
+        .result-stat-label {
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .medals {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .medal {
+            font-size: 3em;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .action-btn {
+            padding: 15px 30px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            color: white;
+            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 243, 255, 0.5);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--neon-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo { font-size: 2em; }
+            .subtitle { font-size: 1em; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .drag-drop-container { grid-template-columns: 1fr; }
+            .game-header { flex-direction: column; }
+            .question-card { padding: 25px; }
+            .results-card { padding: 30px; }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Achievement Toast */
+        .achievement-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+            z-index: 2000;
+            animation: slideInRight 0.5s, slideOutRight 0.5s 3s;
+            display: none;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(400px); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes slideOutRight {
+            to { transform: translateX(400px); opacity: 0; }
+        }
+
+        .achievement-icon {
+            font-size: 2em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Achievement Toast -->
+    <div class="achievement-toast" id="achievementToast">
+        <span class="achievement-icon">🏆</span>
+        <span id="achievementText"></span>
+    </div>
+
+    <div class="container">
+        <!-- Main Menu -->
+        <div id="mainMenu">
+            <div class="header">
+                <h1 class="logo"><i class="fas fa-microchip"></i> INSTRUTOR MATHEUS</h1>
+                <p class="subtitle">⚡ GRAU TÉCNICO - HARDWARE & MANUTENÇÃO ⚡</p>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value" id="totalScore">0</div>
+                    <div class="stat-label">Pontos Totais</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-value" id="totalGames">0</div>
+                    <div class="stat-label">Jogos Completos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value" id="bestStreak">0</div>
+                    <div class="stat-label">Melhor Sequência</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value" id="achievements">0</div>
+                    <div class="stat-label">Conquistas</div>
+                </div>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card" onclick="startGame('identification')">
+                    <div class="menu-icon"><i class="fas fa-puzzle-piece"></i></div>
+                    <h3 class="menu-title">Identificação de Componentes</h3>
+                    <p class="menu-description">Teste seu conhecimento identificando peças de hardware. Arraste e solte os componentes corretos!</p>
+                    <span class="difficulty-badge badge-iniciante">🟢 INICIANTE</span>
+                </div>
+
+                <div class="menu-card" onclick="startGame('diagnostic')">
+                    <div class="menu-icon"><i class="fas fa-stethoscope"></i></div>
+                    <h3 class="menu-title">Diagnóstico de Problemas</h3>
+                    <p class="menu-description">Analise sintomas e identifique problemas. Simule situações reais de troubleshooting!</p>
+                    <span class="difficulty-badge badge-intermediario">🟡 INTERMEDIÁRIO</span>
+                </div>
+
+                <div class="menu-card" onclick="startGame('assembly')">
+                    <div class="menu-icon"><i class="fas fa-screwdriver"></i></div>
+                    <h3 class="menu-title">Montagem de PC</h3>
+                    <p class="menu-description">Monte um computador completo do zero. Escolha componentes compatíveis e evite erros!</p>
+                    <span class="difficulty-badge badge-avancado">🔴 AVANÇADO</span>
+                </div>
+
+                <div class="menu-card" onclick="startGame('compatibility')">
+                    <div class="menu-icon"><i class="fas fa-link"></i></div>
+                    <h3 class="menu-title">Compatibilidade</h3>
+                    <p class="menu-description">Teste compatibilidade entre processador, placa-mãe, RAM e outros componentes!</p>
+                    <span class="difficulty-badge badge-intermediario">🟡 INTERMEDIÁRIO</span>
+                </div>
+
+                <div class="menu-card" onclick="startGame('maintenance')">
+                    <div class="menu-icon"><i class="fas fa-tools"></i></div>
+                    <h3 class="menu-title">Manutenção</h3>
+                    <p class="menu-description">Realize manutenção preventiva e corretiva. Limpeza, troca de pasta térmica e mais!</p>
+                    <span class="difficulty-badge badge-avancado">🔴 AVANÇADO</span>
+                </div>
+
+                <div class="menu-card" onclick="startGame('professional')">
+                    <div class="menu-icon"><i class="fas fa-trophy"></i></div>
+                    <h3 class="menu-title">Desafio Profissional</h3>
+                    <p class="menu-description">Modo extremo com tempo limitado! Prove que você é um técnico profissional!</p>
+                    <span class="difficulty-badge badge-profissional">🔥 PROFISSIONAL</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="game-screen">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+                </button>
+                <div class="game-info">
+                    <div class="info-item">
+                        <i class="fas fa-star"></i>
+                        <span class="info-value" id="currentScore">0</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span class="info-value" id="questionProgress">1/10</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-fire"></i>
+                        <span class="info-value" id="currentStreak">0</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span class="info-value" id="timeRemaining">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gameContent"></div>
+        </div>
+
+        <!-- Feedback Modal -->
+        <div class="feedback-modal" id="feedbackModal">
+            <div class="feedback-content" id="feedbackContent">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <h2 class="feedback-title" id="feedbackTitle"></h2>
+                <p class="feedback-text" id="feedbackText"></p>
+                <button class="continue-btn" onclick="nextQuestion()">
+                    Continuar <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            currentGame: null,
+            currentQuestion: 0,
+            score: 0,
+            streak: 0,
+            correctAnswers: 0,
+            totalQuestions: 10,
+            questions: [],
+            timeLimit: 0,
+            timer: null,
+            startTime: 0,
+            stats: {
+                totalScore: parseInt(localStorage.getItem('totalScore')) || 0,
+                totalGames: parseInt(localStorage.getItem('totalGames')) || 0,
+                bestStreak: parseInt(localStorage.getItem('bestStreak')) || 0,
+                achievements: parseInt(localStorage.getItem('achievements')) || 0
+            }
+        };
+
+        // Questions Database
+        const questionsDB = {
+            identification: [
+                { 
+                    q: "Qual é o componente responsável pelo processamento de dados?", 
+                    options: ["CPU/Processador", "Placa de Vídeo", "Memória RAM", "HD/SSD"], 
+                    correct: 0, 
+                    explanation: "A CPU (Central Processing Unit) é o cérebro do computador, responsável por executar todas as instruções e processar dados." 
+                },
+                { 
+                    q: "Qual componente armazena dados permanentemente?", 
+                    options: ["Memória RAM", "HD/SSD", "Cache", "Registrador"], 
+                    correct: 1, 
+                    explanation: "HD (Hard Disk) e SSD (Solid State Drive) são dispositivos de armazenamento permanente que mantêm os dados mesmo quando o computador é desligado." 
+                },
+                { 
+                    q: "Qual peça fornece energia para todos os componentes?", 
+                    options: ["Gabinete", "Cooler", "Fonte de Alimentação", "Placa-Mãe"], 
+                    correct: 2, 
+                    explanation: "A fonte de alimentação converte energia elétrica da tomada em corrente adequada para os componentes do PC." 
+                },
+                { 
+                    q: "Onde são conectados processador, RAM e placa de vídeo?", 
+                    options: ["HD", "Fonte", "Placa-Mãe", "Gabinete"], 
+                    correct: 2, 
+                    explanation: "A placa-mãe (motherboard) é a base onde todos os componentes principais são conectados e se comunicam." 
+                },
+                { 
+                    q: "Qual componente é responsável por gráficos em jogos?", 
+                    options: ["CPU", "GPU/Placa de Vídeo", "RAM", "SSD"], 
+                    correct: 1, 
+                    explanation: "A GPU (Graphics Processing Unit) ou placa de vídeo é especializada em processar gráficos e imagens." 
+                }
+            ],
+            diagnostic: [
+                { 
+                    q: "PC não liga e não emite som. Possível causa?", 
+                    options: ["HD com defeito", "Problema na fonte/energia", "Monitor desligado", "Vírus"], 
+                    correct: 1, 
+                    explanation: "Se não há sinais de vida (LEDs, ventoinhas), o problema geralmente está na fonte de alimentação ou conexões de energia." 
+                },
+                { 
+                    q: "Computador liga mas não aparece imagem. Causa provável?", 
+                    options: ["HD formatado", "Problema na GPU/monitor", "RAM com defeito", "Vírus"], 
+                    correct: 1, 
+                    explanation: "Sem imagem mas com PC ligado indica problema na placa de vídeo, cabo de vídeo ou monitor." 
+                },
+                { 
+                    q: "PC emite bips ao ligar. O que significam?", 
+                    options: ["Música de inicialização", "Códigos de erro da BIOS", "Aviso de vírus", "Som normal"], 
+                    correct: 1, 
+                    explanation: "Bips são códigos POST da BIOS indicando erros de hardware (RAM, GPU, etc)." 
+                },
+                { 
+                    q: "Computador reinicia sozinho. Causa comum?", 
+                    options: ["Atualização automática", "Superaquecimento", "HD cheio", "Internet lenta"], 
+                    correct: 1, 
+                    explanation: "Reinícios inesperados geralmente são causados por superaquecimento da CPU/GPU ou problemas na fonte." 
+                },
+                { 
+                    q: "Tela azul (BSOD) frequente. Solução?", 
+                    options: ["Reinstalar Windows", "Verificar RAM e drivers", "Trocar monitor", "Limpar teclado"], 
+                    correct: 1, 
+                    explanation: "Telas azuis indicam problemas de hardware (RAM) ou drivers incompatíveis/corrompidos." 
+                }
+            ],
+            assembly: [
+                { 
+                    q: "Primeira peça a instalar ao montar um PC?", 
+                    options: ["GPU", "Fonte de alimentação", "Processador na placa-mãe", "HD"], 
+                    correct: 2, 
+                    explanation: "Instale primeiro CPU, cooler e RAM na placa-mãe antes de fixá-la no gabinete. É mais fácil!" 
+                },
+                { 
+                    q: "Antes de instalar o processador, deve-se?", 
+                    options: ["Ligar a energia", "Levantar a trava do socket", "Forçar encaixe", "Aplicar pasta térmica"], 
+                    correct: 1, 
+                    explanation: "Sempre levante a trava/alavanca do socket antes de instalar a CPU para evitar danos." 
+                },
+                { 
+                    q: "Ao instalar RAM, deve-se?", 
+                    options: ["Forçar violentamente", "Abrir travas e alinhar chanfro", "Instalar em qualquer slot", "Não usar travas"], 
+                    correct: 1, 
+                    explanation: "Abra as travas laterais do slot, alinhe o chanfro da RAM e pressione uniformemente até travar." 
+                },
+                { 
+                    q: "Ordem correta de montagem no gabinete?", 
+                    options: ["GPU, depois placa-mãe", "Placa-mãe, depois componentes", "HD primeiro, resto depois", "Qualquer ordem"], 
+                    correct: 1, 
+                    explanation: "Instale placa-mãe com CPU/RAM primeiro, depois GPU, armazenamento e conecte cabos." 
+                },
+                { 
+                    q: "Ao conectar fonte, conectores mais importantes?", 
+                    options: ["Só cabo de força", "ATX 24-pinos + CPU 8-pinos", "Apenas periféricos", "SATA apenas"], 
+                    correct: 1, 
+                    explanation: "Conecte obrigatoriamente o ATX 24-pinos (placa-mãe) e CPU 4/8-pinos para o sistema ligar." 
+                }
+            ],
+            compatibility: [
+                { 
+                    q: "Processador Intel Core i5-12600K é compatível com?", 
+                    options: ["Socket AM4", "Socket LGA 1700", "Socket AM5", "Socket LGA 1200"], 
+                    correct: 1, 
+                    explanation: "Intel 12ª geração (Alder Lake) usa socket LGA 1700. Sempre verifique compatibilidade!" 
+                },
+                { 
+                    q: "RAM DDR4 funciona em placa com DDR5?", 
+                    options: ["Sim, perfeito", "NÃO, são incompatíveis", "Só com adaptador", "Depende da cor"], 
+                    correct: 1, 
+                    explanation: "DDR4 e DDR5 têm chanfros diferentes e voltagens distintas. São FISICAMENTE incompatíveis." 
+                },
+                { 
+                    q: "Ryzen 5 7600X requer qual socket?", 
+                    options: ["AM4", "AM5", "LGA 1700", "AM3"], 
+                    correct: 1, 
+                    explanation: "Ryzen série 7000 usa novo socket AM5 (não compatível com AM4)." 
+                },
+                { 
+                    q: "Fonte com apenas 1 conector PCIe 8-pin pode alimentar?", 
+                    options: ["RTX 4090", "GTX 1650", "RTX 4070 Ti", "RX 7900 XTX"], 
+                    correct: 1, 
+                    explanation: "GTX 1650 consome ~75W (sem conector extra). GPUs topo de linha precisam múltiplos conectores 8-pin." 
+                },
+                { 
+                    q: "Placa-mãe B550 (AMD) suporta?", 
+                    options: ["Intel Core i9", "Ryzen 5000/7000", "Ryzen 5000 (não 7000)", "Pentium 4"], 
+                    correct: 2, 
+                    explanation: "B550 é socket AM4 e suporta Ryzen 3000/5000. Ryzen 7000 precisa de AM5." 
+                }
+            ],
+            maintenance: [
+                { 
+                    q: "Frequência recomendada para limpeza interna?", 
+                    options: ["Nunca limpar", "A cada 3-6 meses", "Só quando quebrar", "Diariamente"], 
+                    correct: 1, 
+                    explanation: "Limpeza a cada 3-6 meses (ou mais em ambientes empoeirados) previne superaquecimento." 
+                },
+                { 
+                    q: "Melhor método para limpar componentes internos?", 
+                    options: ["Água e sabão", "Ar comprimido/pincel macio", "Aspirador doméstico", "Mangueira"], 
+                    correct: 1, 
+                    explanation: "Use ar comprimido ou pincel antiestático. NUNCA água ou aspirador (gera estática)." 
+                },
+                { 
+                    q: "Ao trocar pasta térmica, deve-se?", 
+                    options: ["Adicionar sobre a antiga", "Remover antiga e limpar com álcool isopropílico", "Não remover antiga", "Usar pasta de dente"], 
+                    correct: 1, 
+                    explanation: "SEMPRE remova pasta antiga com álcool isopropílico 99% antes de aplicar nova camada." 
+                },
+                { 
+                    q: "Temperatura normal de CPU em uso?", 
+                    options: ["90-100°C", "40-70°C", "100-120°C", "10-20°C"], 
+                    correct: 1, 
+                    explanation: "CPU saudável: idle 30-45°C, uso 40-70°C. Acima de 80°C constantemente indica problema de refrigeração." 
+                },
+                { 
+                    q: "Sintoma de pasta térmica ressecada?", 
+                    options: ["PC mais rápido", "Superaquecimento e throttling", "Nenhum sintoma", "Tela colorida"], 
+                    correct: 1, 
+                    explanation: "Pasta ressecada perde eficiência térmica, causando superaquecimento e redução de desempenho." 
+                }
+            ],
+            professional: [
+                { 
+                    q: "Cliente: 'PC não inicia, apenas bips longos'. Diagnóstico?", 
+                    options: ["HD corrompido", "Memória RAM não detectada", "Windows desatualizado", "Mouse sem fio"], 
+                    correct: 1, 
+                    explanation: "Bips longos geralmente indicam falha na RAM. Teste recolocando os pentes ou testando slots diferentes." 
+                },
+                { 
+                    q: "Montagem high-end: Ryzen 9 7950X + RTX 4090. Fonte mínima?", 
+                    options: ["500W", "1000W ou superior", "300W", "750W"], 
+                    correct: 1, 
+                    explanation: "RTX 4090 (450W) + Ryzen 9 7950X (170W) + sistema = ~850W. Fonte 1000W+ garante estabilidade e margem." 
+                },
+                { 
+                    q: "Troubleshooting: PC liga, sem vídeo, RAM testada OK. Próximo passo?", 
+                    options: ["Formatar HD", "Testar GPU em outra máquina ou vídeo integrado", "Trocar mouse", "Reinstalar Chrome"], 
+                    correct: 1, 
+                    explanation: "Com RAM OK, teste outra GPU ou vídeo integrado para isolar se o problema está na placa de vídeo." 
+                },
+                { 
+                    q: "Cliente quer máxima performance. Dual-channel ou single?", 
+                    options: ["Single-channel melhor", "Dual-channel (2 pentes)", "Tanto faz", "Não usar RAM"], 
+                    correct: 1, 
+                    explanation: "Dual-channel (2+ pentes em slots corretos) dobra largura de banda da RAM, aumentando performance." 
+                },
+                { 
+                    q: "Erro POST: 'CPU over temperature'. Ação imediata?", 
+                    options: ["Ignorar e continuar", "Desligar, verificar cooler e pasta térmica", "Overclock mais", "Remover cooler"], 
+                    correct: 1, 
+                    explanation: "NUNCA ignore temperatura crítica! Desligue, verifique se cooler está bem fixado e pasta térmica adequada." 
+                }
+            ]
+        };
+
+        // Initialize particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Update stats display
+        function updateStatsDisplay() {
+            document.getElementById('totalScore').textContent = gameState.stats.totalScore;
+            document.getElementById('totalGames').textContent = gameState.stats.totalGames;
+            document.getElementById('bestStreak').textContent = gameState.stats.bestStreak;
+            document.getElementById('achievements').textContent = gameState.stats.achievements;
+        }
+
+        // Save stats
+        function saveStats() {
+            localStorage.setItem('totalScore', gameState.stats.totalScore);
+            localStorage.setItem('totalGames', gameState.stats.totalGames);
+            localStorage.setItem('bestStreak', gameState.stats.bestStreak);
+            localStorage.setItem('achievements', gameState.stats.achievements);
+        }
+
+        // Show achievement
+        function showAchievement(text) {
+            const toast = document.getElementById('achievementToast');
+            document.getElementById('achievementText').textContent = text;
+            toast.style.display = 'flex';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3500);
+        }
+
+        // Start game
+        function startGame(gameType) {
+            gameState.currentGame = gameType;
+            gameState.currentQuestion = 0;
+            gameState.score = 0;
+            gameState.streak = 0;
+            gameState.correctAnswers = 0;
+            gameState.startTime = Date.now();
+
+            // Set questions based on game type
+            const allQuestions = questionsDB[gameType] || questionsDB.identification;
+            gameState.questions = shuffleArray([...allQuestions]).slice(0, gameState.totalQuestions);
+
+            // Set time limit for professional mode
+            if (gameType === 'professional') {
+                gameState.timeLimit = 30; // 30 seconds per question
+            } else {
+                gameState.timeLimit = 0; // No time limit
+            }
+
+            // Hide menu, show game
+            document.getElementById('mainMenu').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+
+            // Update game info
+            updateGameInfo();
+
+            // Load first question
+            loadQuestion();
+        }
+
+        // Shuffle array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Update game info
+        function updateGameInfo() {
+            document.getElementById('currentScore').textContent = gameState.score;
+            document.getElementById('questionProgress').textContent = 
+                `${gameState.currentQuestion + 1}/${gameState.totalQuestions}`;
+            document.getElementById('currentStreak').textContent = gameState.streak;
+            
+            if (gameState.timeLimit > 0) {
+                document.getElementById('timeRemaining').textContent = gameState.timeLimit + 's';
+            } else {
+                document.getElementById('timeRemaining').textContent = '--';
+            }
+        }
+
+        // Load question
+        function loadQuestion() {
+            if (gameState.currentQuestion >= gameState.totalQuestions) {
+                endGame();
+                return;
+            }
+
+            const question = gameState.questions[gameState.currentQuestion];
+            const gameContent = document.getElementById('gameContent');
+
+            // Clear timer if exists
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+            }
+
+            // Build question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-number">Questão ${gameState.currentQuestion + 1} de ${gameState.totalQuestions}</div>
+                    <h2 class="question-text">${question.q}</h2>
+                    <div class="options-grid">
+            `;
+
+            question.options.forEach((option, index) => {
+                html += `
+                    <button class="option-btn" onclick="checkAnswer(${index})" data-option="${index}">
+                        <strong>${String.fromCharCode(65 + index)})</strong> ${option}
+                    </button>
+                `;
+            });
+
+            html += `</div>`;
+
+            // Add timer for professional mode
+            if (gameState.timeLimit > 0) {
+                html += `
+                    <div class="timer-bar">
+                        <div class="timer-fill" id="timerFill" style="width: 100%;"></div>
+                    </div>
+                `;
+            }
+
+            html += `</div>`;
+
+            gameContent.innerHTML = html;
+
+            // Start timer for professional mode
+            if (gameState.timeLimit > 0) {
+                startTimer();
+            }
+
+            updateGameInfo();
+        }
+
+        // Start timer
+        function startTimer() {
+            let timeLeft = gameState.timeLimit;
+            document.getElementById('timeRemaining').textContent = timeLeft + 's';
+
+            gameState.timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timeRemaining').textContent = timeLeft + 's';
+                
+                const percentage = (timeLeft / gameState.timeLimit) * 100;
+                const timerFill = document.getElementById('timerFill');
+                if (timerFill) {
+                    timerFill.style.width = percentage + '%';
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(gameState.timer);
+                    checkAnswer(-1); // Time's up, wrong answer
+                }
+            }, 1000);
+        }
+
+        // Check answer
+        function checkAnswer(selectedIndex) {
+            // Clear timer
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+            }
+
+            const question = gameState.questions[gameState.currentQuestion];
+            const isCorrect = selectedIndex === question.correct;
+
+            // Disable all buttons
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach((btn, index) => {
+                btn.disabled = true;
+                if (index === question.correct) {
+                    btn.classList.add('correct');
+                }
+                if (index === selectedIndex && !isCorrect) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            // Update score and streak
+            if (isCorrect) {
+                gameState.correctAnswers++;
+                gameState.streak++;
+                const points = gameState.timeLimit > 0 ? 100 : 50; // More points in professional mode
+                gameState.score += points + (gameState.streak * 10);
+                
+                // Check for streak achievements
+                if (gameState.streak === 5) {
+                    showAchievement('🔥 Sequência de 5! Você está pegando fogo!');
+                }
+                if (gameState.streak === 10) {
+                    showAchievement('⚡ INCRÍVEL! 10 seguidas! Técnico Master!');
+                    gameState.stats.achievements++;
+                }
+            } else {
+                gameState.streak = 0;
+            }
+
+            // Show feedback
+            setTimeout(() => {
+                showFeedback(isCorrect, question);
+            }, 800);
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, question) {
+            const modal = document.getElementById('feedbackModal');
+            const content = document.getElementById('feedbackContent');
+            const icon = document.getElementById('feedbackIcon');
+            const title = document.getElementById('feedbackTitle');
+            const text = document.getElementById('feedbackText');
+
+            if (isCorrect) {
+                content.style.borderColor = 'var(--neon-green)';
+                icon.textContent = '✅';
+                icon.style.color = 'var(--neon-green)';
+                title.textContent = 'CORRETO!';
+                title.style.color = 'var(--neon-green)';
+            } else {
+                content.style.borderColor = 'var(--neon-pink)';
+                icon.textContent = '❌';
+                icon.style.color = 'var(--neon-pink)';
+                title.textContent = 'INCORRETO';
+                title.style.color = 'var(--neon-pink)';
+            }
+
+            text.innerHTML = `
+                <strong>Explicação:</strong><br>${question.explanation}
+                <br><br>
+                <strong>Resposta correta:</strong> ${question.options[question.correct]}
+            `;
+
+            modal.style.display = 'flex';
+        }
+
+        // Next question
+        function nextQuestion() {
+            document.getElementById('feedbackModal').style.display = 'none';
+            gameState.currentQuestion++;
+            loadQuestion();
+        }
+
+        // End game
+        function endGame() {
+            const gameContent = document.getElementById('gameContent');
+            const percentage = Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100);
+            const timeSpent = Math.round((Date.now() - gameState.startTime) / 1000);
+
+            // Update global stats
+            gameState.stats.totalScore += gameState.score;
+            gameState.stats.totalGames++;
+            if (gameState.streak > gameState.stats.bestStreak) {
+                gameState.stats.bestStreak = gameState.streak;
+            }
+
+            // Award achievements
+            if (percentage === 100) {
+                showAchievement('🏆 PERFEITO! 100% de acertos!');
+                gameState.stats.achievements++;
+            } else if (percentage >= 90) {
+                showAchievement('⭐ EXCELENTE! Mais de 90% de acertos!');
+            } else if (percentage >= 70) {
+                showAchievement('👍 MUITO BOM! Continue praticando!');
+            }
+
+            saveStats();
+            updateStatsDisplay();
+
+            // Determine medal
+            let medal = '';
+            if (percentage >= 90) medal = '🥇';
+            else if (percentage >= 70) medal = '🥈';
+            else if (percentage >= 50) medal = '🥉';
+            else medal = '📖';
+
+            // Determine performance message
+            let perfMsg = '';
+            if (percentage === 100) perfMsg = 'DESEMPENHO PERFEITO! Você domina o assunto! 🎯';
+            else if (percentage >= 90) perfMsg = 'DESEMPENHO EXCELENTE! Técnico profissional! ⚡';
+            else if (percentage >= 70) perfMsg = 'BOM DESEMPENHO! Continue estudando! 📚';
+            else if (percentage >= 50) perfMsg = 'DESEMPENHO MÉDIO. Revise o conteúdo! 📖';
+            else perfMsg = 'PRECISA MELHORAR. Estude mais e tente novamente! 💪';
+
+            gameContent.innerHTML = `
+                <div class="results-card">
+                    <div class="results-icon">${medal}</div>
+                    <h2 class="results-title">JOGO CONCLUÍDO!</h2>
+                    <p style="font-size: 1.2em; color: var(--text-secondary); margin-bottom: 20px;">
+                        ${perfMsg}
+                    </p>
+                    
+                    <div class="results-stats">
+                        <div class="result-stat">
+                            <div class="result-stat-value">${gameState.score}</div>
+                            <div class="result-stat-label">Pontos</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-value">${gameState.correctAnswers}/${gameState.totalQuestions}</div>
+                            <div class="result-stat-label">Acertos</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-value">${percentage}%</div>
+                            <div class="result-stat-label">Aproveitamento</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-value">${timeSpent}s</div>
+                            <div class="result-stat-label">Tempo</div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="action-btn primary-btn" onclick="startGame('${gameState.currentGame}')">
+                            <i class="fas fa-redo"></i> Jogar Novamente
+                        </button>
+                        <button class="action-btn secondary-btn" onclick="backToMenu()">
+                            <i class="fas fa-home"></i> Menu Principal
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Back to menu
+        function backToMenu() {
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+            }
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('mainMenu').style.display = 'block';
+            document.getElementById('feedbackModal').style.display = 'none';
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            updateStatsDisplay();
+        });
+    </script>
+</body>
+</html>
