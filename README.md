@@ -101,14 +101,9 @@ Para criar um **novo módulo**, adicione uma chave ao objeto `questionsDB` e um 
 
 - HTML5 / CSS3 / JavaScript (Vanilla — sem dependências de framework)
 - [Font Awesome 6](https://fontawesome.com/) — ícones
-- [Google Fonts](https://fonts.google.com/) — Orbitron + Inter
-- `localStorage` — persistência de dados
+- [Google Fonts](https://fonts.google.com/) — Orbitron + Inter- `localStorage` — persistência de dados
 
----
 
-## 📄 Licença
-
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 
 ---
 
