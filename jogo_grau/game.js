@@ -6,7 +6,7 @@
 /* ============================================================
    ESTADO DO JOGO
    ============================================================ */
-const gameState = {
+const gameState = { 
   currentGame:     null, 
   currentQuestion: 0,
   score:           0,
