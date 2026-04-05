@@ -7,7 +7,7 @@
    ESTADO DO JOGO
    ============================================================ */
 const gameState = {
-  currentGame:     null,
+  currentGame:     null, 
   currentQuestion: 0,
   score:           0,
   streak:          0,
